@@ -2,7 +2,9 @@ Shader "Unlit/DepthToDisplace"
 {
     Properties
     {
-        _MainTex("Texture", 2D) = "white" {}
+        _MainTex("", 2D) = "white" {}
+        [HDR] _BaseColor("", Color) = (1, 1, 1)
+        [HDR] _SparkleColor("", Color) = (1, 1, 1)
     }
 
     CGINCLUDE
@@ -14,19 +16,23 @@ Shader "Unlit/DepthToDisplace"
     float4 _MainTex_TexelSize;
 
     float _DepthScale;
+    float3 _BaseColor;
+    float3 _SparkleColor;
 
     void Vertex(
-        float4 position : POSITION,
-        float2 texcoord : TEXCOORD0,
+        float4 input : POSITION,
         out float4 cs_position : SV_Position,
         out float3 ws_position : TEXCOORD0,
-        out float4 color : COLOR
+        out float3 color : COLOR
     )
     {
-        float4 uv = float4(texcoord, 0, 0);
+        float4 uv = float4(input.xy, 0, 0);
+
+        float4 pos = float4(uv.xy - 0.5, 0, 1);
+        pos.y *= _MainTex_TexelSize.x * _MainTex_TexelSize.w;
 
         float depth = tex2Dlod(_MainTex, uv).x;
-        position.z += depth * _DepthScale;
+        pos.z += depth * _DepthScale;
 
         float3 eps = float3(_MainTex_TexelSize.xy, 0);
         float depth_b = tex2Dlod(_MainTex, uv - eps.zyzz).x;
@@ -46,18 +52,18 @@ Shader "Unlit/DepthToDisplace"
         );
         norm = normalize(norm);
 
-        ws_position = mul(unity_ObjectToWorld, position);
+        ws_position = mul(unity_ObjectToWorld, pos);
         cs_position = UnityWorldToClipPos(ws_position);
-        color = norm.z * smoothstep(0.01, 0.02, depth);
+        color = _BaseColor * norm.z * smoothstep(0.01, 0.02, depth);
     }
 
     float4 Fragment(
         float4 cs_position : SV_Position,
         float3 ws_position : TEXCOORD0,
-        float4 color : COLOR
+        float3 color : COLOR
     ) : SV_Target
     {
-        float y = ws_position.y * 400;
+        float y = ws_position.y * 250;
 
         float yi = abs(0.5 - frac(y));
         yi = 1 - smoothstep(0.0, fwidth(y), yi);
@@ -66,11 +72,11 @@ Shader "Unlit/DepthToDisplace"
 
         //c *= 0 + 1 *Random(dot(abs(ws_position), float3(50, 50 * 50, 50 * 50 * 50)));
         //c *=2;
-        float nn = snoise(ws_position * 600);
+        float nn = snoise(ws_position * 500);
         c *= 1 + nn;
 
-        c = GammaToLinearSpace(saturate(c));
-        c *= 1 + smoothstep(0.5, 1, nn) * 60;
+        //c = GammaToLinearSpace(saturate(c));
+        c *= 1 + smoothstep(0.5, 1, nn) * _SparkleColor;
 
         return float4(c, 1);
     }
