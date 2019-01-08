@@ -9,13 +9,25 @@ namespace DepthCamFx
     {
         #region Editable attributes
 
+        enum RenderMode { Body, Aura }
+
         [SerializeField, Range(8, 512)] int _columnCount = 256;
         [SerializeField, Range(8, 512)] int _rowCount = 256;
-        [SerializeField, ColorUsage(false, true)] Color _baseColor = Color.white;
-        [SerializeField, ColorUsage(false, true)] Color _sparkleColor = Color.white;
-        [SerializeField] float _depthScale = 1;
+
         [SerializeField] Texture _sourceTexture = null;
-        [SerializeField] Shader _shader = null;
+        [SerializeField] float _depthScale = 1;
+
+        [SerializeField, ColorUsage(false, true)] Color _lineColor = Color.white;
+        [SerializeField] float _lineRepeat = 200;
+
+        [SerializeField, ColorUsage(false, true)] Color _sparkleColor = Color.white;
+        [SerializeField, Range(0, 1)] float _sparkleDensity = 0.5f;
+
+        [SerializeField] RenderMode _renderMode = RenderMode.Body;
+        [SerializeField, Range(0, 1)] float _deformation = 0;
+
+        [SerializeField] Shader _bodyShader = null;
+        [SerializeField] Shader _auraShader = null;
 
         #endregion
 
@@ -24,31 +36,32 @@ namespace DepthCamFx
         Mesh _mesh;
         Material _material;
 
-        void LazyInitialize()
+        Shader ShaderForCurrentMode { get {
+            return _renderMode == RenderMode.Body ? _bodyShader : _auraShader;
+        } }
+
+        #endregion
+
+        #region Internal methods
+
+        internal void Reconstruct()
         {
+            // Material reconstruction
+            if (_material != null) Utility.Destroy(_material);
+            _material = new Material(ShaderForCurrentMode);
+            _material.hideFlags = HideFlags.DontSave;
+
+            // Mesh object lazy initialization
             if (_mesh == null)
             {
                 _mesh = new Mesh();
                 _mesh.hideFlags = HideFlags.DontSave;
                 _mesh.name = "Depth To Displace";
                 _mesh.indexFormat = IndexFormat.UInt32;
-                ReconstructMesh();
             }
 
-            if (_material == null)
-            {
-                _material = new Material(_shader);
-                _material.hideFlags = HideFlags.DontSave;
-            }
-        }
-
-        #endregion
-
-        #region Internal methods
-
-        internal void ReconstructMesh()
-        {
-            var vertices  = new List<Vector3>();
+            // Mesh reconstruction
+            var vertices = new List<Vector3>();
 
             for (var ri = 0; ri < _rowCount; ri++)
             {
@@ -92,29 +105,24 @@ namespace DepthCamFx
 
         void OnDestroy()
         {
-            if (Application.isPlaying)
-            {
-                if (_mesh != null) Destroy(_mesh);
-                if (_material != null) Destroy(_material);
-            }
-            else
-            {
-                if (_mesh != null) DestroyImmediate(_mesh);
-                if (_material != null) DestroyImmediate(_material);
-            }
-
-            _mesh = null;
-            _material = null;
+            Utility.Destroy(_mesh);
+            Utility.Destroy(_material);
         }
 
         void Update()
         {
-            LazyInitialize();
+            if (_mesh == null) Reconstruct();
 
-            _material.SetColor("_BaseColor", _baseColor);
-            _material.SetColor("_SparkleColor", _sparkleColor);
-            _material.SetFloat("_DepthScale", _depthScale);
             _material.mainTexture = _sourceTexture;
+            _material.SetFloat("_DepthScale", _depthScale);
+
+            _material.SetColor("_LineColor", _lineColor);
+            _material.SetFloat("_LineRepeat", _lineRepeat);
+
+            _material.SetColor("_SparkleColor", _sparkleColor);
+            _material.SetFloat("_SparkleDensity", _sparkleDensity);
+
+            _material.SetFloat("_Deformation", _deformation);
 
             Graphics.DrawMesh(
                 _mesh, transform.localToWorldMatrix,
