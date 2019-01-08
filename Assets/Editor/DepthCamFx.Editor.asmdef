@@ -1,7 +1,7 @@
 {
-    "name": "Scanner.Editor",
+    "name": "DepthCamFx.Editor",
     "references": [
-        "Scanner"
+        "DepthCamFx"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

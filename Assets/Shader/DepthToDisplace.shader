@@ -1,4 +1,4 @@
-Shader "Unlit/DepthToDisplace"
+Shader "Hidden/Depth To Displace"
 {
     Properties
     {
