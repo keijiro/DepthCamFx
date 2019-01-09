@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace DepthCamFx
@@ -9,7 +8,14 @@ namespace DepthCamFx
     {
         #region Editable attributes
 
-        [SerializeField] int _lineCount = 1000;
+        [SerializeField] int _pointCount = 1000;
+
+        [SerializeField] float _curveLength = 10;
+        [SerializeField] float _curveAnimation = 0.02f;
+
+        [SerializeField] float _noiseAmplitude = 0.05f;
+        [SerializeField] float _noiseAnimation = 1;
+
         [SerializeField] Texture _sourceTexture = null;
         [SerializeField] float _depthScale = 1;
         [SerializeField, ColorUsage(false, true)] Color _lineColor = Color.white;
@@ -18,7 +24,7 @@ namespace DepthCamFx
 
         void OnValidate()
         {
-            _lineCount = Mathf.Max(_lineCount, 1);
+            _pointCount = Mathf.Max(_pointCount, 1);
         }
 
         #endregion
@@ -27,38 +33,37 @@ namespace DepthCamFx
 
         Mesh _mesh;
         Material _material;
-        float _time = 10;
-
-        void LazyInitialize()
-        {
-            if (_mesh == null)
-            {
-                _mesh = new Mesh();
-                _mesh.hideFlags = HideFlags.DontSave;
-                _mesh.name = "Warp Effect";
-                ReconstructMesh();
-            }
-
-            if (_material == null)
-            {
-                _material = new Material(_shader);
-                _material.hideFlags = HideFlags.DontSave;
-            }
-        }
+        float _time;
 
         #endregion
 
         #region Internal methods
 
-        internal void ReconstructMesh()
+        internal void Reconstruct()
         {
+            // Material object lazy initialization
+            if (_material == null)
+            {
+                _material = new Material(_shader);
+                _material.hideFlags = HideFlags.DontSave;
+            }
+
+            // Mesh object lazy initialization
+            if (_mesh == null)
+            {
+                _mesh = new Mesh();
+                _mesh.hideFlags = HideFlags.DontSave;
+                _mesh.name = "Fiber";
+            }
+
+            // Mesh reconstruction
             _mesh.Clear();
-            _mesh.vertices = new Vector3[_lineCount * 2];
+            _mesh.vertices = new Vector3[_pointCount];
             _mesh.SetIndices(
-                Enumerable.Range(0, _lineCount * 2).ToArray(),
-                MeshTopology.Lines, 0
+                Enumerable.Range(0, _pointCount).ToArray(),
+                MeshTopology.LineStrip, 0
             );
-            _mesh.bounds = new Bounds(Vector3.zero, new Vector3(1, 1, 1));
+            _mesh.bounds = new Bounds(Vector3.zero, new Vector3(1, 1, 10));
             _mesh.UploadMeshData(true);
         }
 
@@ -68,29 +73,26 @@ namespace DepthCamFx
 
         void OnDestroy()
         {
-            if (Application.isPlaying)
-            {
-                if (_mesh != null) Destroy(_mesh);
-                if (_material != null) Destroy(_material);
-            }
-            else
-            {
-                if (_mesh != null) DestroyImmediate(_mesh);
-                if (_material != null) DestroyImmediate(_material);
-            }
-
-            _mesh = null;
-            _material = null;
+            Utility.Destroy(_mesh);
+            Utility.Destroy(_material);
         }
 
         void Update()
         {
-            if (Application.isPlaying) _time += Time.deltaTime;
+            if (_mesh == null) Reconstruct();
 
-            LazyInitialize();
+            if (Application.isPlaying) _time += Time.deltaTime;
 
             _material.mainTexture = _sourceTexture;
             _material.SetFloat("_DepthScale", _depthScale);
+
+            _material.SetVector("_CurveParams", new Vector2(
+                _curveLength / _pointCount, _curveAnimation
+            ));
+
+            _material.SetVector("_NoiseParams", new Vector2(
+                _noiseAmplitude, _noiseAnimation
+            ));
 
             _material.SetColor("_LineColor", _lineColor);
             _material.SetFloat("_LocalTime", _time);
