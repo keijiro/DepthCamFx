@@ -3,6 +3,7 @@ Shader "Hidden/Ditho/Surface Body"
     CGINCLUDE
 
     #include "UnityCG.cginc"
+    #include "Common.hlsl"
     #include "SimplexNoise3D.hlsl"
 
     sampler2D _MainTex;
@@ -20,7 +21,7 @@ Shader "Hidden/Ditho/Surface Body"
         float4 input : POSITION,
         out float4 cs_position : SV_Position,
         out float3 ws_position : TEXCOORD0,
-        out float3 color : COLOR
+        out float2 color : COLOR
     )
     {
         // UV coordinate
@@ -50,16 +51,17 @@ Shader "Hidden/Ditho/Surface Body"
         // Output
         ws_position = mul(unity_ObjectToWorld, pos);
         cs_position = UnityWorldToClipPos(ws_position);
-        color = normal.z * smoothstep(0, 0.02, depth);
+        color = float2(normal.z, depth);
     }
 
     float4 Fragment(
         float4 cs_position : SV_Position,
         float3 ws_position : TEXCOORD0,
-        float3 color : COLOR
+        float2 color : COLOR
     ) : SV_Target
     {
-        clip(color - 0.0001);
+        float dither = Random(cs_position.x + cs_position.y * 10000);
+        clip(color.y - 0.08 * dither);
 
         // Potential
         float pt = ws_position.y * _LineRepeat;
@@ -73,7 +75,7 @@ Shader "Hidden/Ditho/Surface Body"
         // Color mixing
         float3 lc = _LineColor * (1 + nf);
         float3 sc = _SparkleColor * smoothstep(1 - _SparkleDensity, 1, nf);
-        return float4(li * color * (lc + sc), 1);
+        return float4(li * color.x * (lc + sc), 1);
     }
 
     ENDCG
