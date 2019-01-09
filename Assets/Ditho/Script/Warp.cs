@@ -2,10 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DepthCamFx
+namespace Ditho
 {
     [ExecuteInEditMode]
-    sealed class WarpEffect : MonoBehaviour
+    sealed class Warp : MonoBehaviour
     {
         #region Editable attributes
 

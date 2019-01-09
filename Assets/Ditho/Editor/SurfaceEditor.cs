@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace DepthCamFx
+namespace Ditho
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(DepthToDisplace))]
-    sealed class DepthToDisplaceEditor : Editor
+    [CustomEditor(typeof(Surface))]
+    sealed class SurfaceEditor : Editor
     {
         SerializedProperty _columnCount;
         SerializedProperty _rowCount;
@@ -70,7 +70,7 @@ namespace DepthCamFx
             serializedObject.ApplyModifiedProperties();
 
             if (needsReconstruct)
-                foreach (DepthToDisplace d2d in targets) d2d.Reconstruct();
+                foreach (Surface s in targets) s.Reconstruct();
         }
     }
 }

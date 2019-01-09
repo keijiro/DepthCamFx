@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace DepthCamFx
+namespace Ditho
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(WarpEffect))]
-    sealed class WarpEffectEditor : Editor
+    [CustomEditor(typeof(Warp))]
+    sealed class WarpEditor : Editor
     {
         SerializedProperty _lineCount;
 
@@ -52,7 +52,7 @@ namespace DepthCamFx
             serializedObject.ApplyModifiedProperties();
 
             if (needsReconstruct)
-                foreach (WarpEffect we in targets) we.ReconstructMesh();
+                foreach (Warp w in targets) w.ReconstructMesh();
         }
     }
 }

@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Linq;
 
-namespace DepthCamFx
+namespace Ditho
 {
     [ExecuteInEditMode]
-    sealed class FiberRenderer : MonoBehaviour
+    sealed class Fiber : MonoBehaviour
     {
         #region Editable attributes
 

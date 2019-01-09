@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace DepthCamFx
+namespace Ditho
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(FiberRenderer))]
-    sealed class FiberRendererEditor : Editor
+    [CustomEditor(typeof(Fiber))]
+    sealed class FiberEditor : Editor
     {
         SerializedProperty _pointCount;
 
@@ -61,7 +61,7 @@ namespace DepthCamFx
             serializedObject.ApplyModifiedProperties();
 
             if (needsReconstruct)
-                foreach (FiberRenderer fr in targets) fr.Reconstruct();
+                foreach (Fiber f in targets) f.Reconstruct();
         }
     }
 }

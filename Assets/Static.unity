@@ -260,12 +260,12 @@ GameObject:
   - component: {fileID: 660710957}
   - component: {fileID: 660710956}
   m_Layer: 0
-  m_Name: Warp Effect
+  m_Name: Warp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &660710956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 900399591}
   - component: {fileID: 900399590}
   m_Layer: 0
-  m_Name: Depth To Displace
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

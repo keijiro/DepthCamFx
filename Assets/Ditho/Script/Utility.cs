@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DepthCamFx
+namespace Ditho
 {
     static class Utility
     {

@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections.Generic;
 
-namespace DepthCamFx
+namespace Ditho
 {
     [ExecuteInEditMode]
-    sealed class DepthToDisplace : MonoBehaviour
+    sealed class Surface : MonoBehaviour
     {
         #region Editable attributes
 

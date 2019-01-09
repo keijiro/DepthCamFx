@@ -1,4 +1,4 @@
-Shader "Hidden/Warp Effect"
+Shader "Hidden/Ditho/Warp"
 {
     CGINCLUDE
 
