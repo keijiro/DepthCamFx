@@ -382,10 +382,10 @@ MonoBehaviour:
   _rowCount: 300
   _sourceTexture: {fileID: 8400000, guid: 4a2bcd7a75487994eb484439890316cc, type: 2}
   _depthScale: 3.5
-  _lineColor: {r: 0.972549, g: 0.41627854, b: 0, a: 1}
+  _lineColor: {r: 2.9482174, g: 1.2601252, b: 0, a: 1}
   _lineRepeat: 200
-  _sparkleColor: {r: 1367.1202, g: 346.09314, b: 0, a: 1}
-  _sparkleDensity: 0.5
+  _sparkleColor: {r: 1782.8876, g: 457.39, b: 0, a: 1}
+  _sparkleDensity: 0.53
   _renderMode: 0
   _deformation: 0
   _bodyShader: {fileID: 4800000, guid: 6fe0e0a6ac2908141958edb55d4ba732, type: 3}

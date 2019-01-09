@@ -18,30 +18,26 @@ Shader "Hidden/Ditho/Surface Body"
     float _SparkleDensity;
 
     void Vertex(
-        float4 input : POSITION,
+        float2 uv : POSITION,
         out float4 cs_position : SV_Position,
         out float3 ws_position : TEXCOORD0,
         out float2 color : COLOR
     )
     {
-        // UV coordinate
-        float4 uv = float4(input.xy, 0, 0);
+        // Displacement sample
+        float z = tex2Dlod(_MainTex, float4(uv, 0, 0)).x;
 
         // Object space position
-        float4 pos = float4(uv.xy - 0.5, 0, 1);
-        pos.y *= _MainTex_TexelSize.x * _MainTex_TexelSize.w;
-
-        // Displacement by depth
-        float depth = tex2Dlod(_MainTex, uv).x;
-        pos.z += depth * _DepthScale;
+        float aspect = _MainTex_TexelSize.x * _MainTex_TexelSize.w;
+        float4 os_pos = float4(uv.x - 0.5, (uv.y - 0.5) * aspect, z * _DepthScale, 1);
 
         // Normal vector calculation
         float3 eps = float3(_MainTex_TexelSize.xy, 0);
 
-        float depth_b = tex2Dlod(_MainTex, uv - eps.zyzz).x;
-        float depth_t = tex2Dlod(_MainTex, uv + eps.zyzz).x;
-        float depth_l = tex2Dlod(_MainTex, uv - eps.xzzz).x;
-        float depth_r = tex2Dlod(_MainTex, uv + eps.xzzz).x;
+        float depth_b = tex2Dlod(_MainTex, float4(uv - eps.zy, 0, 0)).x;
+        float depth_t = tex2Dlod(_MainTex, float4(uv + eps.zy, 0, 0)).x;
+        float depth_l = tex2Dlod(_MainTex, float4(uv - eps.xz, 0, 0)).x;
+        float depth_r = tex2Dlod(_MainTex, float4(uv + eps.xz, 0, 0)).x;
 
         float3 bv_h = float3(eps.x, 0, (depth_r - depth_l) * _DepthScale);
         float3 bv_v = float3(0, eps.x, (depth_t - depth_b) * _DepthScale);
@@ -49,9 +45,9 @@ Shader "Hidden/Ditho/Surface Body"
         float3 normal = normalize(cross(bv_h, bv_v));
 
         // Output
-        ws_position = mul(unity_ObjectToWorld, pos);
+        ws_position = mul(unity_ObjectToWorld, os_pos);
         cs_position = UnityWorldToClipPos(ws_position);
-        color = float2(normal.z, depth);
+        color = float2(normal.z, z);
     }
 
     float4 Fragment(
