@@ -13,7 +13,8 @@ namespace Ditho
         [SerializeField, Range(8, 512)] int _rowCount = 256;
 
         [SerializeField] Texture _sourceTexture = null;
-        [SerializeField] float _depthScale = 1;
+        [SerializeField] float _depth = 0.487f;
+        [SerializeField] float _cutoff = 0.1f;
         [SerializeField] float _noiseAmplitude = 0;
         [SerializeField] float _noiseAnimation = 1;
 
@@ -82,12 +83,12 @@ namespace Ditho
                     var head = _columnCount * ri + ci;
 
                     indices[i++] = head;
-                    indices[i++] = head + 1;
                     indices[i++] = head + _columnCount;
+                    indices[i++] = head + 1;
 
                     indices[i++] = head + 1;
-                    indices[i++] = head + _columnCount + 1;
                     indices[i++] = head + _columnCount;
+                    indices[i++] = head + _columnCount + 1;
                 }
             }
 
@@ -115,7 +116,10 @@ namespace Ditho
             if (Application.isPlaying) _time += Time.deltaTime;
 
             _material.mainTexture = _sourceTexture;
-            _material.SetFloat("_DepthScale", _depthScale);
+
+            _material.SetVector("_DepthParams", new Vector2(
+                _depth, _cutoff
+            ));
 
             _material.SetVector("_NoiseParams", new Vector2(
                 _noiseAmplitude, _noiseAnimation

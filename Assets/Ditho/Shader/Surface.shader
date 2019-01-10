@@ -8,8 +8,7 @@ Shader "Hidden/Ditho/Surface"
 
     sampler2D _MainTex;
     float4 _MainTex_TexelSize;
-
-    float _DepthScale;
+    float2 _DepthParams; // dist, cutoff
     float2 _NoiseParams; // amp, anim
 
     float3 _LineColor;
@@ -24,18 +23,16 @@ Shader "Hidden/Ditho/Surface"
         float2 uv : POSITION,
         out float4 cs_position : SV_Position,
         out float3 ws_position : TEXCOORD0,
-        out float2 color : COLOR
+        out float3 color : COLOR
     )
     {
         // Displacement sample
         float d = tex2Dlod(_MainTex, float4(uv, 0, 0)).x;
 
         // Object space position
-        float3 os_pos = float3(
-            uv.x - 0.5,
-            (uv.y - 0.5) * _MainTex_TexelSize.x * _MainTex_TexelSize.w,
-            d * _DepthScale
-        );
+        float3 os_pos = float3(uv - 0.5, 0);
+        os_pos.xy *= float2(-1, _MainTex_TexelSize.x * _MainTex_TexelSize.w);
+        os_pos = lerp(os_pos, float3(0, 0, _DepthParams.x), d);
 
         // Additional noise
         float3 np = float3(uv * 20, _LocalTime * _NoiseParams.y);
@@ -49,29 +46,29 @@ Shader "Hidden/Ditho/Surface"
         float depth_l = tex2Dlod(_MainTex, float4(uv - eps.xz, 0, 0)).x;
         float depth_r = tex2Dlod(_MainTex, float4(uv + eps.xz, 0, 0)).x;
 
-        float3 bv_h = float3(eps.x, 0, (depth_r - depth_l) * _DepthScale);
-        float3 bv_v = float3(0, eps.x, (depth_t - depth_b) * _DepthScale);
+        float3 bv_h = float3(eps.x, 0, (depth_r - depth_l) * 2);
+        float3 bv_v = float3(0, eps.x, (depth_t - depth_b) * 2);
 
         float3 normal = normalize(cross(bv_h, bv_v));
 
         // Output
         ws_position = mul(unity_ObjectToWorld, float4(os_pos, 1));
         cs_position = UnityWorldToClipPos(ws_position);
-        color = float2(normal.z, d);
+        color = float3(normal.z, uv.y, d);
     }
 
     float4 Fragment(
         float4 cs_position : SV_Position,
         float3 ws_position : TEXCOORD0,
-        float2 color : COLOR
+        float3 color : COLOR
     ) : SV_Target
     {
         // Alpha to coverage
         float dither = Random(cs_position.x + cs_position.y * 10000);
-        clip(color.y - 0.08 * dither);
+        clip(color.z - (dither + 1) * _DepthParams.y / 2);
 
         // Potential
-        float pt = ws_position.y * _LineRepeat;
+        float pt = color.y * _LineRepeat;
 
         // Line intensity
         float li = saturate(1 - abs(0.5 - frac(pt)) / fwidth(pt));

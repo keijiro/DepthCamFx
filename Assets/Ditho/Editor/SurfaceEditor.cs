@@ -11,7 +11,8 @@ namespace Ditho
         SerializedProperty _rowCount;
 
         SerializedProperty _sourceTexture;
-        SerializedProperty _depthScale;
+        SerializedProperty _depth;
+        SerializedProperty _cutoff;
         SerializedProperty _noiseAmplitude;
         SerializedProperty _noiseAnimation;
 
@@ -27,7 +28,8 @@ namespace Ditho
             _rowCount    = serializedObject.FindProperty("_rowCount");
 
             _sourceTexture  = serializedObject.FindProperty("_sourceTexture");
-            _depthScale     = serializedObject.FindProperty("_depthScale");
+            _depth          = serializedObject.FindProperty("_depth");
+            _cutoff         = serializedObject.FindProperty("_cutoff");
             _noiseAmplitude = serializedObject.FindProperty("_noiseAmplitude");
             _noiseAnimation = serializedObject.FindProperty("_noiseAnimation");
 
@@ -50,7 +52,8 @@ namespace Ditho
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(_sourceTexture);
-            EditorGUILayout.PropertyField(_depthScale);
+            EditorGUILayout.PropertyField(_depth);
+            EditorGUILayout.PropertyField(_cutoff);
             EditorGUILayout.PropertyField(_noiseAmplitude);
             EditorGUILayout.PropertyField(_noiseAnimation);
 
