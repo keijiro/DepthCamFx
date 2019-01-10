@@ -9,13 +9,16 @@ namespace Ditho
     {
         #region Editable attributes
 
-        enum RenderMode { Body, Aura }
-
         [SerializeField, Range(8, 512)] int _columnCount = 256;
         [SerializeField, Range(8, 512)] int _rowCount = 256;
 
         [SerializeField] Texture _sourceTexture = null;
         [SerializeField] float _depthScale = 1;
+        [SerializeField] float _noiseAmplitude = 0;
+        [SerializeField] float _noiseAnimation = 1;
+
+        enum RenderMode { Opaque, Transparent }
+        [SerializeField] RenderMode _renderMode = RenderMode.Opaque;
 
         [SerializeField, ColorUsage(false, true)] Color _lineColor = Color.white;
         [SerializeField] float _lineRepeat = 200;
@@ -23,11 +26,7 @@ namespace Ditho
         [SerializeField, ColorUsage(false, true)] Color _sparkleColor = Color.white;
         [SerializeField, Range(0, 1)] float _sparkleDensity = 0.5f;
 
-        [SerializeField] RenderMode _renderMode = RenderMode.Body;
-        [SerializeField, Range(0, 1)] float _deformation = 0;
-
-        [SerializeField] Shader _bodyShader = null;
-        [SerializeField] Shader _auraShader = null;
+        [SerializeField] Shader _shader = null;
 
         #endregion
 
@@ -35,32 +34,32 @@ namespace Ditho
 
         Mesh _mesh;
         Material _material;
+        float _time;
 
-        Shader ShaderForCurrentMode { get {
-            return _renderMode == RenderMode.Body ? _bodyShader : _auraShader;
-        } }
-
-        #endregion
-
-        #region Internal methods
-
-        internal void Reconstruct()
+        void LazyInitialize()
         {
-            // Material reconstruction
-            if (_material != null) Utility.Destroy(_material);
-            _material = new Material(ShaderForCurrentMode);
-            _material.hideFlags = HideFlags.DontSave;
+            if (_material == null)
+            {
+                _material = new Material(_shader);
+                _material.hideFlags = HideFlags.DontSave;
+            }
 
-            // Mesh object lazy initialization
             if (_mesh == null)
             {
                 _mesh = new Mesh();
                 _mesh.hideFlags = HideFlags.DontSave;
                 _mesh.name = "Depth To Displace";
                 _mesh.indexFormat = IndexFormat.UInt32;
+                ReconstructMesh();
             }
+        }
 
-            // Mesh reconstruction
+        #endregion
+
+        #region Internal methods
+
+        internal void ReconstructMesh()
+        {
             var vertices = new List<Vector3>();
 
             for (var ri = 0; ri < _rowCount; ri++)
@@ -111,10 +110,33 @@ namespace Ditho
 
         void Update()
         {
-            if (_mesh == null) Reconstruct();
+            LazyInitialize();
+
+            if (Application.isPlaying) _time += Time.deltaTime;
 
             _material.mainTexture = _sourceTexture;
             _material.SetFloat("_DepthScale", _depthScale);
+
+            _material.SetVector("_NoiseParams", new Vector2(
+                _noiseAmplitude, _noiseAnimation
+            ));
+
+            if (_renderMode == RenderMode.Opaque)
+            {
+                _material.SetInt("_ZWrite", 1);   // On
+                _material.SetInt("_Cull", 2);     // Back
+                _material.SetInt("_SrcBlend", 1); // One
+                _material.SetInt("_DstBlend", 0); // Zero
+                _material.renderQueue = 2450;     // AlphaTest
+            }
+            else
+            {
+                _material.SetInt("_ZWrite", 0);   // Off
+                _material.SetInt("_Cull", 0);     // Off
+                _material.SetInt("_SrcBlend", 1); // One
+                _material.SetInt("_DstBlend", 1); // One
+                _material.renderQueue = 3000;     // Transparent
+            }
 
             _material.SetColor("_LineColor", _lineColor);
             _material.SetFloat("_LineRepeat", _lineRepeat);
@@ -122,7 +144,7 @@ namespace Ditho
             _material.SetColor("_SparkleColor", _sparkleColor);
             _material.SetFloat("_SparkleDensity", _sparkleDensity);
 
-            _material.SetFloat("_Deformation", _deformation);
+            _material.SetFloat("_LocalTime", _time);
 
             Graphics.DrawMesh(
                 _mesh, transform.localToWorldMatrix,

@@ -18,6 +18,8 @@ namespace Ditho
         SerializedProperty _sparkleColor;
         SerializedProperty _sparkleDensity;
 
+        static readonly GUIContent _labelRandomness = new GUIContent("Randomness");
+
         void OnEnable()
         {
             _lineCount = serializedObject.FindProperty("_lineCount");
@@ -40,10 +42,18 @@ namespace Ditho
             EditorGUILayout.PropertyField(_lineCount);
             var needsReconstruct = EditorGUI.EndChangeCheck();
 
+            EditorGUILayout.Space();
+
             EditorGUILayout.PropertyField(_speed);
-            EditorGUILayout.PropertyField(_speedRandomness);
+            EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(_speedRandomness, _labelRandomness);
+            EditorGUI.indentLevel--;
             EditorGUILayout.PropertyField(_length);
-            EditorGUILayout.PropertyField(_lengthRandomness);
+            EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(_lengthRandomness, _labelRandomness);
+            EditorGUI.indentLevel--;
+
+            EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(_lineColor);
             EditorGUILayout.PropertyField(_sparkleColor);

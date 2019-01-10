@@ -3,14 +3,15 @@ Shader "Hidden/Ditho/Warp"
     CGINCLUDE
 
     #include "UnityCG.cginc"
+    #include "Common.hlsl"
     #include "SimplexNoise2D.hlsl"
 
     sampler2D _MainTex;
     float4 _MainTex_TexelSize;
     float _DepthScale;
 
-    float2 _CurveParams;
-    float2 _NoiseParams;
+    float2 _CurveParams; // freq, speed
+    float2 _NoiseParams; // amp, speed
 
     float3 _LineColor;
     float _LocalTime;
@@ -18,32 +19,47 @@ Shader "Hidden/Ditho/Warp"
     void Vertex(
         uint vid : SV_VertexID,
         out float4 cs_position : SV_Position,
-        out float3 color : COLOR
+        out float alpha : COLOR
     )
     {
+        // Noise parameters
         float n1 = vid * _CurveParams.x;
         float n2 = _LocalTime * _CurveParams.y;
         float n3 = _LocalTime * _NoiseParams.y;
 
-        float x = snoise(float2(n1, 98.32 + n2)) * 0.5;
-        float y = snoise(float2(12.32 - n2, n1)) * 0.5;
-        float z = tex2Dlod(_MainTex, float4(x + 0.5, y + 0.5, 0, 0)).x;
+        // UV coordinates
+        float2 uv = float2(
+            snoise(float2(n1, 98.32 + n2)),
+            snoise(float2(12.32 - n2, n1))
+        ) * 0.5 + 0.5;
 
-        z *= 1 + snoise(float2(n3, n1 * -10)) * _NoiseParams.x;
+        // Displacement sample
+        float d = tex2Dlod(_MainTex, float4(uv, 0, 0)).x;
 
-        float aspect = _MainTex_TexelSize.x * _MainTex_TexelSize.w;
-        float4 os_pos = float4(x, y * aspect, z * _DepthScale, 1);
+        // Object space position
+        float3 os_pos = float3(
+            uv.x - 0.5,
+            (uv.y - 0.5) * _MainTex_TexelSize.x * _MainTex_TexelSize.w,
+            d * _DepthScale
+        );
 
-        cs_position = UnityObjectToClipPos(os_pos);
-        color = z > 0.01 ? 0.001 : -1e+5;
+        // Additional noise
+        os_pos.z *= 1 + snoise(float2(n3, n1 * -10)) * _NoiseParams.x;
+
+        // Output
+        cs_position = UnityObjectToClipPos(float4(os_pos, 1));
+        alpha = d;
     }
 
     float4 Fragment(
         float4 cs_position : SV_Position,
-        float3 color : COLOR
+        float alpha : COLOR
     ) : SV_Target
     {
-        clip(color.r);
+        // Alpha to coverage
+        float dither = Random(cs_position.x + cs_position.y * 10000);
+        clip(alpha - 0.15 * dither);
+
         return float4(_LineColor, 1);
     }
 

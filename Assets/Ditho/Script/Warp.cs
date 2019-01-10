@@ -13,7 +13,6 @@ namespace Ditho
 
         [SerializeField] float _speed = 1;
         [SerializeField, Range(0, 1)] float _speedRandomness = 0.5f;
-
         [SerializeField, Range(0, 0.3f)] float _length = 0.1f;
         [SerializeField, Range(0, 1)] float _lengthRandomness = 0.5f;
 
@@ -21,7 +20,7 @@ namespace Ditho
         [SerializeField, ColorUsage(false, true)] Color _sparkleColor = Color.white;
         [SerializeField, Range(0, 1)] float _sparkleDensity = 0.5f;
 
-        [SerializeField, HideInInspector] Shader _shader = null;
+        [SerializeField] Shader _shader = null;
 
         void OnValidate()
         {
@@ -75,26 +74,15 @@ namespace Ditho
 
         void OnDestroy()
         {
-            if (Application.isPlaying)
-            {
-                if (_mesh != null) Destroy(_mesh);
-                if (_material != null) Destroy(_material);
-            }
-            else
-            {
-                if (_mesh != null) DestroyImmediate(_mesh);
-                if (_material != null) DestroyImmediate(_material);
-            }
-
-            _mesh = null;
-            _material = null;
+            Utility.Destroy(_mesh);
+            Utility.Destroy(_material);
         }
 
         void Update()
         {
-            if (Application.isPlaying) _time += Time.deltaTime;
-
             LazyInitialize();
+
+            if (Application.isPlaying) _time += Time.deltaTime;
 
             _material.SetVector("_Speed", new Vector2(_speed, _speedRandomness));
             _material.SetVector("_Length", new Vector2(_length, _lengthRandomness));

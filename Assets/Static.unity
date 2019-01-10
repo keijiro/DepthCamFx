@@ -247,7 +247,7 @@ Transform:
   m_Children:
   - {fileID: 1657600002}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 9.9, y: -28.03, z: -4.4560003}
 --- !u!1 &660710955
 GameObject:
@@ -299,7 +299,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &749974370
 GameObject:
@@ -382,14 +382,14 @@ MonoBehaviour:
   _rowCount: 300
   _sourceTexture: {fileID: 8400000, guid: 4a2bcd7a75487994eb484439890316cc, type: 2}
   _depthScale: 3.5
+  _noiseAmplitude: 0
+  _noiseAnimation: 5
+  _renderMode: 0
   _lineColor: {r: 2.9482174, g: 1.2601252, b: 0, a: 1}
   _lineRepeat: 200
   _sparkleColor: {r: 1782.8876, g: 457.39, b: 0, a: 1}
   _sparkleDensity: 0.53
-  _renderMode: 0
-  _deformation: 0
-  _bodyShader: {fileID: 4800000, guid: 6fe0e0a6ac2908141958edb55d4ba732, type: 3}
-  _auraShader: {fileID: 4800000, guid: 955b9e14ef4704f74b317d4a26ee068e, type: 3}
+  _shader: {fileID: 4800000, guid: 6fe0e0a6ac2908141958edb55d4ba732, type: 3}
 --- !u!4 &900399591
 Transform:
   m_ObjectHideFlags: 0
@@ -403,6 +403,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1206823231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1206823233}
+  - component: {fileID: 1206823232}
+  m_Layer: 0
+  m_Name: Aura
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1206823232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206823231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c462c5a725b50e444b0deaafac16aacf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _columnCount: 400
+  _rowCount: 300
+  _sourceTexture: {fileID: 8400000, guid: 4a2bcd7a75487994eb484439890316cc, type: 2}
+  _depthScale: 3.5
+  _noiseAmplitude: 0.2
+  _noiseAnimation: 5
+  _renderMode: 1
+  _lineColor: {r: 0, g: 0.99415207, b: 2.9482176, a: 1}
+  _lineRepeat: 167
+  _sparkleColor: {r: 2380.295, g: 2380.295, b: 2380.295, a: 1}
+  _sparkleDensity: 0.24
+  _shader: {fileID: 4800000, guid: 6fe0e0a6ac2908141958edb55d4ba732, type: 3}
+--- !u!4 &1206823233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206823231}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1655006360
 GameObject:
@@ -743,5 +798,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

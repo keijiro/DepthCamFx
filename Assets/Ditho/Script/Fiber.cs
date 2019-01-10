@@ -9,18 +9,17 @@ namespace Ditho
         #region Editable attributes
 
         [SerializeField] int _pointCount = 1000;
-
         [SerializeField] float _curveLength = 10;
         [SerializeField] float _curveAnimation = 0.02f;
 
+        [SerializeField] Texture _sourceTexture = null;
+        [SerializeField] float _depthScale = 1;
         [SerializeField] float _noiseAmplitude = 0.05f;
         [SerializeField] float _noiseAnimation = 1;
 
-        [SerializeField] Texture _sourceTexture = null;
-        [SerializeField] float _depthScale = 1;
         [SerializeField, ColorUsage(false, true)] Color _lineColor = Color.white;
 
-        [SerializeField, HideInInspector] Shader _shader = null;
+        [SerializeField] Shader _shader = null;
 
         void OnValidate()
         {
@@ -35,28 +34,29 @@ namespace Ditho
         Material _material;
         float _time;
 
-        #endregion
-
-        #region Internal methods
-
-        internal void Reconstruct()
+        void LazyInitialize()
         {
-            // Material object lazy initialization
             if (_material == null)
             {
                 _material = new Material(_shader);
                 _material.hideFlags = HideFlags.DontSave;
             }
 
-            // Mesh object lazy initialization
             if (_mesh == null)
             {
                 _mesh = new Mesh();
                 _mesh.hideFlags = HideFlags.DontSave;
                 _mesh.name = "Fiber";
+                ReconstructMesh();
             }
+        }
 
-            // Mesh reconstruction
+        #endregion
+
+        #region Internal methods
+
+        internal void ReconstructMesh()
+        {
             _mesh.Clear();
             _mesh.vertices = new Vector3[_pointCount];
             _mesh.SetIndices(
@@ -79,7 +79,7 @@ namespace Ditho
 
         void Update()
         {
-            if (_mesh == null) Reconstruct();
+            LazyInitialize();
 
             if (Application.isPlaying) _time += Time.deltaTime;
 
