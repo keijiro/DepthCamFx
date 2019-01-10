@@ -8,12 +8,13 @@ Shader "Hidden/Ditho/Warp"
 
     sampler2D _MainTex;
     float4 _MainTex_TexelSize;
-    float _DepthScale;
 
+    float2 _DepthParams; // dist, cutoff
     float2 _CurveParams; // freq, speed
     float2 _NoiseParams; // amp, speed
 
     float3 _LineColor;
+
     float _LocalTime;
 
     void Vertex(
@@ -37,11 +38,9 @@ Shader "Hidden/Ditho/Warp"
         float d = tex2Dlod(_MainTex, float4(uv, 0, 0)).x;
 
         // Object space position
-        float3 os_pos = float3(
-            uv.x - 0.5,
-            (uv.y - 0.5) * _MainTex_TexelSize.x * _MainTex_TexelSize.w,
-            d * _DepthScale
-        );
+        float3 os_pos = float3(uv - 0.5, 0);
+        os_pos.xy *= float2(-1, _MainTex_TexelSize.x * _MainTex_TexelSize.w);
+        os_pos = lerp(os_pos, float3(0, 0, _DepthParams.x), d);
 
         // Additional noise
         os_pos.z *= 1 + snoise(float2(n3, n1 * -10)) * _NoiseParams.x;
@@ -58,7 +57,7 @@ Shader "Hidden/Ditho/Warp"
     {
         // Alpha to coverage
         float dither = Random(cs_position.x + cs_position.y * 10000);
-        clip(alpha - 0.15 * dither);
+        clip(alpha - (dither + 1) * _DepthParams.y / 2);
 
         return float4(_LineColor, 1);
     }

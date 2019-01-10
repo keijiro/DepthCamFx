@@ -9,6 +9,10 @@ namespace Ditho
     {
         SerializedProperty _lineCount;
 
+        SerializedProperty _depth;
+        SerializedProperty _cutoff;
+        SerializedProperty _extent;
+
         SerializedProperty _speed;
         SerializedProperty _speedRandomness;
         SerializedProperty _length;
@@ -23,6 +27,10 @@ namespace Ditho
         void OnEnable()
         {
             _lineCount = serializedObject.FindProperty("_lineCount");
+
+            _depth  = serializedObject.FindProperty("_depth");
+            _cutoff = serializedObject.FindProperty("_cutoff");
+            _extent = serializedObject.FindProperty("_extent");
 
             _speed            = serializedObject.FindProperty("_speed");
             _speedRandomness  = serializedObject.FindProperty("_speedRandomness");
@@ -41,6 +49,12 @@ namespace Ditho
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(_lineCount);
             var needsReconstruct = EditorGUI.EndChangeCheck();
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.PropertyField(_depth);
+            EditorGUILayout.PropertyField(_cutoff);
+            EditorGUILayout.PropertyField(_extent);
 
             EditorGUILayout.Space();
 

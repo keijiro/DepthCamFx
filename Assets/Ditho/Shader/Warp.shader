@@ -6,6 +6,9 @@ Shader "Hidden/Ditho/Warp"
     #include "Common.hlsl"
     #include "SimplexNoise3D.hlsl"
 
+    float2 _DepthParams; // dist, cutoff
+    float3 _Extent;
+
     float2 _Speed;
     float2 _Length;
 
@@ -18,7 +21,8 @@ Shader "Hidden/Ditho/Warp"
     void Vertex(
         uint vid : SV_VertexID,
         out float4 cs_position : SV_Position,
-        out float3 ws_position : TEXCOORD0
+        out float3 ws_position : TEXCOORD0,
+        out float color : COLOR
     )
     {
         uint seed = (vid / 2) * 4;
@@ -27,21 +31,30 @@ Shader "Hidden/Ditho/Warp"
         float spd = lerp(1 - _Speed .y, 1, Random(seed + 2)) * _Speed .x;
         float len = lerp(1 - _Length.y, 1, Random(seed + 3)) * _Length.x;
 
-        float x = Random(seed + 0) - 0.5;
-        float y = Random(seed + 1) - 0.5;
-        float z = (spd * _LocalTime) % 1 - 0.5;
+        float3 pos = float3(
+            Random(seed + 0) - 0.5,
+            Random(seed + 1) - 0.5,
+            (spd * _LocalTime) % 1 - len * sw
+        );
+        color = pos.z;
 
-        float4 pos = float4(x, y, z + len * sw, 1);
+        pos *= _Extent;
+        pos = float3(pos.xy, _DepthParams.x) * pos.z;
 
-        ws_position = mul(unity_ObjectToWorld, pos);
+        ws_position = mul(unity_ObjectToWorld, float4(pos, 1));
         cs_position = UnityWorldToClipPos(ws_position);
     }
 
     float4 Fragment(
         float4 cs_position : SV_Position,
-        float3 ws_position : TEXCOORD0
+        float3 ws_position : TEXCOORD0,
+        float alpha : COLOR
     ) : SV_Target
     {
+        // Alpha to coverage
+        float dither = Random(cs_position.x + cs_position.y * 10000);
+        clip(alpha - (dither + 1) * _DepthParams.y / 2);
+
         // World space position based noise field
         float nf = snoise(ws_position * 500);
 

@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 128058349}
   - component: {fileID: 128058348}
+  - component: {fileID: 128058347}
   m_Layer: 0
   m_Name: Scan Camera
   m_TagString: MainCamera
@@ -129,6 +130,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &128058347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128058346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ca6b8d03173ec40a60b465e4d672f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shader: {fileID: 4800000, guid: d9be7b66d0d930643a40598cb68eddc8, type: 3}
 --- !u!20 &128058348
 Camera:
   m_ObjectHideFlags: 0
@@ -152,7 +166,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5
+  far clip plane: 1.1
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -160,15 +174,15 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 4a2bcd7a75487994eb484439890316cc, type: 2}
+  m_RenderingPath: 1
+  m_TargetTexture: {fileID: 8400000, guid: 835af0dbfa3b1774dbbd4304b714fd01, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!4 &128058349
@@ -241,14 +255,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644026681}
-  m_LocalRotation: {x: 0.09303431, y: -0.23783568, z: -0.01669759, w: 0.9666954}
-  m_LocalPosition: {x: 0.216, y: 0.1, z: -0.718}
+  m_LocalRotation: {x: 0.0015826749, y: 0.42151007, z: -0.0007356607, w: 0.9068221}
+  m_LocalPosition: {x: -0.08, y: 0.06, z: -0.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1657600002}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 9.9, y: -28.03, z: -4.4560003}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0.2, y: 49.86, z: 0}
 --- !u!1 &660710955
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,14 +292,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50539bb676b16ee4a9b34291877f7fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lineCount: 10000
-  _speed: 1
-  _speedRandomness: 0.5
-  _length: 0.085
-  _lengthRandomness: 0.5
+  _lineCount: 2000
+  _depth: 0.487
+  _cutoff: 0.1
+  _extent: {x: 2, y: 2, z: 2}
+  _speed: 2
+  _speedRandomness: 0.2
+  _length: 0.1
+  _lengthRandomness: 0.2
   _lineColor: {r: 0.972549, g: 0.41627854, b: 0, a: 1}
-  _sparkleColor: {r: 1367.1202, g: 346.09314, b: 0, a: 1}
-  _sparkleDensity: 0.75
+  _sparkleColor: {r: 220.26176, g: 56.506943, b: 0, a: 1}
+  _sparkleDensity: 0.5
   _shader: {fileID: 4800000, guid: 7ebfcd9aea591ed4ab4f3dc8120ce567, type: 3}
 --- !u!4 &660710957
 Transform:
@@ -294,13 +311,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660710955}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 20}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.487}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &749974370
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,15 +397,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _columnCount: 400
   _rowCount: 300
-  _sourceTexture: {fileID: 8400000, guid: 4a2bcd7a75487994eb484439890316cc, type: 2}
-  _depthScale: 3.5
+  _sourceTexture: {fileID: 8400000, guid: 835af0dbfa3b1774dbbd4304b714fd01, type: 2}
+  _depth: 0.487
+  _cutoff: 0.2
   _noiseAmplitude: 0
   _noiseAnimation: 5
   _renderMode: 0
   _lineColor: {r: 2.9482174, g: 1.2601252, b: 0, a: 1}
-  _lineRepeat: 200
-  _sparkleColor: {r: 1782.8876, g: 457.39, b: 0, a: 1}
-  _sparkleDensity: 0.53
+  _lineRepeat: 300
+  _sparkleColor: {r: 581.2745, g: 149.12277, b: 0, a: 1}
+  _sparkleDensity: 0.5
   _shader: {fileID: 4800000, guid: 6fe0e0a6ac2908141958edb55d4ba732, type: 3}
 --- !u!4 &900399591
 Transform:
@@ -402,7 +420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1206823231
 GameObject:
@@ -435,9 +453,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _columnCount: 400
   _rowCount: 300
-  _sourceTexture: {fileID: 8400000, guid: 4a2bcd7a75487994eb484439890316cc, type: 2}
-  _depthScale: 3.5
-  _noiseAmplitude: 0.2
+  _sourceTexture: {fileID: 8400000, guid: 835af0dbfa3b1774dbbd4304b714fd01, type: 2}
+  _depth: 0.487
+  _cutoff: 0.2
+  _noiseAmplitude: 0.1
   _noiseAnimation: 5
   _renderMode: 1
   _lineColor: {r: 0, g: 0.99415207, b: 2.9482176, a: 1}
@@ -453,11 +472,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206823231}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -0.03}
+  m_LocalPosition: {x: 0, y: 0, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1655006360
 GameObject:
@@ -578,7 +597,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 10
-  field of view: 12
+  field of view: 8.6
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -604,7 +623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657599998}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.2}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 749974371}
@@ -780,10 +799,11 @@ MonoBehaviour:
   _pointCount: 2000
   _curveLength: 30
   _curveAnimation: 0.02
+  _sourceTexture: {fileID: 8400000, guid: 835af0dbfa3b1774dbbd4304b714fd01, type: 2}
+  _depth: 0.487
+  _cutoff: 0.2
   _noiseAmplitude: 0.05
   _noiseAnimation: 1
-  _sourceTexture: {fileID: 8400000, guid: 4a2bcd7a75487994eb484439890316cc, type: 2}
-  _depthScale: 3.5
   _lineColor: {r: 0, g: 33.89676, b: 22.716152, a: 1}
   _shader: {fileID: 4800000, guid: 7a858575495384006b2aee11f2498568, type: 3}
 --- !u!4 &1877407115
@@ -798,5 +818,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

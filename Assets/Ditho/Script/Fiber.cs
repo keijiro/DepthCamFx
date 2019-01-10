@@ -13,7 +13,8 @@ namespace Ditho
         [SerializeField] float _curveAnimation = 0.02f;
 
         [SerializeField] Texture _sourceTexture = null;
-        [SerializeField] float _depthScale = 1;
+        [SerializeField] float _depth = 0.487f;
+        [SerializeField] float _cutoff = 0.1f;
         [SerializeField] float _noiseAmplitude = 0.05f;
         [SerializeField] float _noiseAnimation = 1;
 
@@ -84,7 +85,10 @@ namespace Ditho
             if (Application.isPlaying) _time += Time.deltaTime;
 
             _material.mainTexture = _sourceTexture;
-            _material.SetFloat("_DepthScale", _depthScale);
+
+            _material.SetVector("_DepthParams", new Vector2(
+                _depth, _cutoff
+            ));
 
             _material.SetVector("_CurveParams", new Vector2(
                 _curveLength / _pointCount, _curveAnimation

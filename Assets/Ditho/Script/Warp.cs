@@ -11,9 +11,13 @@ namespace Ditho
 
         [SerializeField] int _lineCount = 1000;
 
+        [SerializeField] float _depth = 0.487f;
+        [SerializeField] float _cutoff = 0.1f;
+        [SerializeField] Vector3 _extent = Vector3.one;
+
         [SerializeField] float _speed = 1;
         [SerializeField, Range(0, 1)] float _speedRandomness = 0.5f;
-        [SerializeField, Range(0, 0.3f)] float _length = 0.1f;
+        [SerializeField, Range(0, 0.5f)] float _length = 0.1f;
         [SerializeField, Range(0, 1)] float _lengthRandomness = 0.5f;
 
         [SerializeField, ColorUsage(false, true)] Color _lineColor = Color.white;
@@ -84,11 +88,16 @@ namespace Ditho
 
             if (Application.isPlaying) _time += Time.deltaTime;
 
+            _material.SetVector("_DepthParams", new Vector2(_depth, _cutoff));
+            _material.SetVector("_Extent", _extent);
+
             _material.SetVector("_Speed", new Vector2(_speed, _speedRandomness));
             _material.SetVector("_Length", new Vector2(_length, _lengthRandomness));
+
             _material.SetColor("_LineColor", _lineColor);
             _material.SetColor("_SparkleColor", _sparkleColor);
             _material.SetFloat("_SparkleDensity", _sparkleDensity);
+
             _material.SetFloat("_LocalTime", _time);
 
             Graphics.DrawMesh(
