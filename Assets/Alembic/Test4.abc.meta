@@ -1,0 +1,52 @@
+fileFormatVersion: 2
+guid: bf54a7dfc0031a04292b48caf2f8ea20
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: Test4/Test4
+    100002: Test4/Test4/body
+    100004: Test4/Test4/polymesh
+    400000: Test4/Test4/Transform
+    400002: Test4/Test4/body/Transform
+    400004: Test4/Test4/polymesh/Transform
+    2100000: Default Material
+    2300000: Test4/Test4/body/MeshRenderer
+    2300002: Test4/Test4/polymesh/MeshRenderer
+    3300000: Test4/Test4/body/MeshFilter
+    3300002: Test4/Test4/polymesh/MeshFilter
+    4300000: /polymesh
+    4300002: /body
+    7400000: Default Animation
+    7400002: Test4_Frames
+    11400000: Test4/Test4/MonoBehaviour-UnityEngine.Formats.Alembic.Importer.AlembicStreamPlayer
+    11400002: Test4_ABCDesc
+    100100000: Test4
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f53f5fc499d31e44b9deee84d28a9ee8, type: 3}
+  streamSettings:
+    normals: 1
+    tangents: 1
+    cameraAspectRatio: 2
+    importVisibility: 1
+    scaleFactor: 0.01
+    swapHandedness: 1
+    flipFaces: 0
+    turnQuadEdges: 0
+    interpolateSamples: 1
+    importPointPolygon: 1
+    importLinePolygon: 1
+    importTrianglePolygon: 1
+    importXform: 1
+    importCameras: 1
+    importMeshes: 1
+    importPoints: 0
+  abcStartTime: 0
+  abcEndTime: 111.90000583603978
+  startTime: 0
+  endTime: 111.90000583603978
+  importWarning: 
+  varyingTopologyMeshNames: []
+  splittingMeshNames: []
+  firstImport: 0

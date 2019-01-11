@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 524f418870a1eeb45a891fe9c78bf14f
+guid: a78e65d007f7bd54c997fc0393ec680d
 ScriptedImporter:
   fileIDToRecycleName:
-    100006: Test1/Test1
-    100008: Test1/Test1/body
-    100010: Test1/Test1/polymesh
-    400006: Test1/Test1/Transform
-    400008: Test1/Test1/body/Transform
-    400010: Test1/Test1/polymesh/Transform
+    100000: Test3/Test3
+    100002: Test3/Test3/body
+    100004: Test3/Test3/polymesh
+    400000: Test3/Test3/Transform
+    400002: Test3/Test3/body/Transform
+    400004: Test3/Test3/polymesh/Transform
     2100000: Default Material
-    2300004: Test1/Test1/body/MeshRenderer
-    2300006: Test1/Test1/polymesh/MeshRenderer
-    3300004: Test1/Test1/body/MeshFilter
-    3300006: Test1/Test1/polymesh/MeshFilter
+    2300000: Test3/Test3/body/MeshRenderer
+    2300002: Test3/Test3/polymesh/MeshRenderer
+    3300000: Test3/Test3/body/MeshFilter
+    3300002: Test3/Test3/polymesh/MeshFilter
     4300000: /polymesh
     4300002: /body
     7400000: Default Animation
-    7400004: Test1_Frames
-    11400000: Test1/Test1/MonoBehaviour-UnityEngine.Formats.Alembic.Importer.AlembicStreamPlayer
-    11400006: Test1_ABCDesc
-    100100002: Test1
+    7400002: Test3_Frames
+    11400000: Test3/Test3/MonoBehaviour-UnityEngine.Formats.Alembic.Importer.AlembicStreamPlayer
+    11400002: Test3_ABCDesc
+    100100000: Test3
   externalObjects: {}
   userData: 
   assetBundleName: 
@@ -41,11 +41,11 @@ ScriptedImporter:
     importXform: 1
     importCameras: 1
     importMeshes: 1
-    importPoints: 1
+    importPoints: 0
   abcStartTime: 0
-  abcEndTime: 110.90000578388572
+  abcEndTime: 122.86667307466269
   startTime: 0
-  endTime: 110.90000578388572
+  endTime: 122.86667307466269
   importWarning: 
   varyingTopologyMeshNames: []
   splittingMeshNames: []

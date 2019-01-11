@@ -79,7 +79,7 @@ Shader "Hidden/Ditho/Surface"
         // Color mixing
         float3 lc = _LineColor * (1 + nf);
         float3 sc = _SparkleColor * smoothstep(1 - _SparkleDensity, 1, nf);
-        return float4(li * color.x * (lc + sc), 1);
+        return float4(li * saturate(color.x) * (lc + sc), 1);
     }
 
     ENDCG

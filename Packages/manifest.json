@@ -4,6 +4,8 @@
     "com.unity.package-manager-ui": "2.0.3",
     "com.unity.postprocessing": "2.1.2",
     "jp.keijiro.danish-statues": "https://github.com/keijiro/DanishStatues.git#upm",
+    "jp.keijiro.ffmpeg-out": "https://github.com/keijiro/jp.keijiro.ffmpeg-out.git",
+    "jp.keijiro.klak.timeline.procedural-motion": "https://github.com/keijiro/ProceduralMotionTrack.git#upm",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.audio": "1.0.0",
     "com.unity.modules.cloth": "1.0.0",
@@ -22,6 +24,14 @@
     "jp.keijiro.danish-statues": {
       "hash": "de6f1eac24342e8fac2ab7d4d19e0755cbfa8ebe",
       "revision": "upm"
+    },
+    "jp.keijiro.klak.timeline.procedural-motion": {
+      "hash": "bcdcf104956a21500e2894bb762f19b6307cbb8e",
+      "revision": "upm"
+    },
+    "jp.keijiro.ffmpeg-out": {
+      "hash": "e16db01d0d2622a1379c80fad6eec59f7d3111c9",
+      "revision": "HEAD"
     }
   }
 }

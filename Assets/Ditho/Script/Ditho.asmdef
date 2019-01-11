@@ -1,6 +1,8 @@
 {
     "name": "Ditho",
-    "references": [],
+    "references": [
+        "Unity.Postprocessing.Runtime"
+    ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -68,7 +68,7 @@ namespace Ditho
                 Enumerable.Range(0, _lineCount * 2).ToArray(),
                 MeshTopology.Lines, 0
             );
-            _mesh.bounds = new Bounds(Vector3.zero, new Vector3(1, 1, 1));
+            _mesh.bounds = new Bounds(Vector3.zero, new Vector3(1, 1, 1000));
             _mesh.UploadMeshData(true);
         }
 
