@@ -36,7 +36,7 @@ Shader "Hidden/Ditho/Surface"
 
         // Additional noise
         float3 np = float3(uv * 20, _LocalTime * _NoiseParams.y);
-        os_pos.z *= 1 + snoise(np) * _NoiseParams.x;
+        os_pos += snoise_grad(np).xyz * float3(0.1, 0.1, 1) * _NoiseParams.x;
 
         // Normal vector calculation
         float3 eps = float3(_MainTex_TexelSize.xy, 0);
