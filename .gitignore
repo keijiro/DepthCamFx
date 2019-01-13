@@ -16,5 +16,6 @@ Desktop.ini
 /Library
 /Temp
 
-# Alembic
+# Big files
 *.abc
+*.wav
