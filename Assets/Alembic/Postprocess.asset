@@ -16,8 +16,7 @@ MonoBehaviour:
   - {fileID: 114860946777764556}
   - {fileID: 114836565684843110}
   - {fileID: 114519843645632470}
-  - {fileID: 114358493637957566}
-  - {fileID: 114741624643747420}
+  - {fileID: 114449999188210578}
   - {fileID: 114352173642277436}
   - {fileID: 114352642809097150}
 --- !u!114 &114352173642277436
@@ -90,7 +89,7 @@ MonoBehaviour:
   fastMode:
     overrideState: 0
     value: 0
---- !u!114 &114358493637957566
+--- !u!114 &114449999188210578
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,8 +141,8 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   temperature:
-    overrideState: 1
-    value: 12
+    overrideState: 0
+    value: 0
   tint:
     overrideState: 0
     value: 0
@@ -154,14 +153,14 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   saturation:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 8
   brightness:
     overrideState: 0
     value: 0
   postExposure:
     overrideState: 1
-    value: 0.71
+    value: 0.95
   contrast:
     overrideState: 0
     value: 0
@@ -193,14 +192,14 @@ MonoBehaviour:
     overrideState: 0
     value: 100
   lift:
-    overrideState: 1
-    value: {x: 0.7993773, y: 0.92292345, z: 1, w: 0}
+    overrideState: 0
+    value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     overrideState: 1
-    value: {x: 0.94657725, y: 0.9679219, z: 1, w: 0}
+    value: {x: 0.7367851, y: 1, z: 0.7869005, w: 0.017482515}
   gain:
     overrideState: 1
-    value: {x: 0.95402724, y: 1, z: 0.98468894, w: 0}
+    value: {x: 1, y: 0.8337716, z: 0.9024103, w: -0.052447543}
   masterCurve:
     overrideState: 0
     value:
@@ -1413,7 +1412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65e486e4de6e5448a8fbb43dc8756a0, type: 3}
   m_Name: Grain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -1422,35 +1421,13 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 1
+    value: 0.5
   size:
     overrideState: 0
     value: 1
   lumContrib:
     overrideState: 0
     value: 0.8
---- !u!114 &114741624643747420
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
-  m_Name: MotionBlur
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  shutterAngle:
-    overrideState: 1
-    value: 360
-  sampleCount:
-    overrideState: 1
-    value: 10
 --- !u!114 &114836565684843110
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1469,7 +1446,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.6
+    value: 0.3
   threshold:
     overrideState: 1
     value: 0.6
@@ -1481,7 +1458,7 @@ MonoBehaviour:
     value: 65472
   diffusion:
     overrideState: 1
-    value: 6
+    value: 9
   anamorphicRatio:
     overrideState: 0
     value: 0
