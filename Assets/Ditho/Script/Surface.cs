@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Rendering;
+using UnityEngine.Timeline;
 using System.Collections.Generic;
 
 namespace Ditho
 {
     [ExecuteInEditMode]
-    sealed class Surface : MonoBehaviour
+    sealed class Surface : MonoBehaviour, ITimeControl, IPropertyPreview
     {
         #region Editable attributes
 
@@ -35,7 +37,14 @@ namespace Ditho
 
         Mesh _mesh;
         Material _material;
-        float _time;
+        float _controlTime = -1;
+
+        float LocalTime { get {
+            if (_controlTime < 0)
+                return Application.isPlaying ? Time.time : 0;
+            else
+                return _controlTime;
+        } }
 
         void LazyInitialize()
         {
@@ -101,6 +110,32 @@ namespace Ditho
 
         #endregion
 
+        #region ITimeControl implementation
+
+        public void OnControlTimeStart()
+        {
+        }
+
+        public void OnControlTimeStop()
+        {
+            _controlTime = -1;
+        }
+
+        public void SetTime(double time)
+        {
+            _controlTime = (float)time;
+        }
+
+        #endregion
+
+        #region IPropertyPreview implementation
+
+        public void GatherProperties(PlayableDirector director, IPropertyCollector driver)
+        {
+        }
+
+        #endregion
+
         #region MonoBehaviour implementation
 
         void OnDestroy()
@@ -112,8 +147,6 @@ namespace Ditho
         void Update()
         {
             LazyInitialize();
-
-            if (Application.isPlaying) _time += Time.deltaTime;
 
             _material.mainTexture = _sourceTexture;
 
@@ -148,7 +181,7 @@ namespace Ditho
             _material.SetColor("_SparkleColor", _sparkleColor);
             _material.SetFloat("_SparkleDensity", _sparkleDensity);
 
-            _material.SetFloat("_LocalTime", _time);
+            _material.SetFloat("_LocalTime", LocalTime + 10);
 
             Graphics.DrawMesh(
                 _mesh, transform.localToWorldMatrix,

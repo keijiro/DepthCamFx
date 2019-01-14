@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Ditho
 {
     [ExecuteInEditMode]
-    sealed class Warp : MonoBehaviour
+    sealed class Warp : MonoBehaviour, ITimeControl, IPropertyPreview
     {
         #region Editable attributes
 
@@ -37,7 +39,14 @@ namespace Ditho
 
         Mesh _mesh;
         Material _material;
-        float _time = 10;
+        float _controlTime = -1;
+
+        float LocalTime { get {
+            if (_controlTime < 0)
+                return Application.isPlaying ? Time.time : 0;
+            else
+                return _controlTime;
+        } }
 
         void LazyInitialize()
         {
@@ -74,6 +83,32 @@ namespace Ditho
 
         #endregion
 
+        #region ITimeControl implementation
+
+        public void OnControlTimeStart()
+        {
+        }
+
+        public void OnControlTimeStop()
+        {
+            _controlTime = -1;
+        }
+
+        public void SetTime(double time)
+        {
+            _controlTime = (float)time;
+        }
+
+        #endregion
+
+        #region IPropertyPreview implementation
+
+        public void GatherProperties(PlayableDirector director, IPropertyCollector driver)
+        {
+        }
+
+        #endregion
+
         #region MonoBehaviour implementation
 
         void OnDestroy()
@@ -86,8 +121,6 @@ namespace Ditho
         {
             LazyInitialize();
 
-            if (Application.isPlaying) _time += Time.deltaTime;
-
             _material.SetVector("_DepthParams", new Vector2(_depth, _cutoff));
             _material.SetVector("_Extent", _extent);
 
@@ -98,7 +131,7 @@ namespace Ditho
             _material.SetColor("_SparkleColor", _sparkleColor);
             _material.SetFloat("_SparkleDensity", _sparkleDensity);
 
-            _material.SetFloat("_LocalTime", _time);
+            _material.SetFloat("_LocalTime", LocalTime + 10);
 
             Graphics.DrawMesh(
                 _mesh, transform.localToWorldMatrix,

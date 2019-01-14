@@ -5,6 +5,7 @@
     "com.unity.postprocessing": "2.1.2",
     "jp.keijiro.danish-statues": "https://github.com/keijiro/DanishStatues.git#upm",
     "jp.keijiro.ffmpeg-out": "https://github.com/keijiro/jp.keijiro.ffmpeg-out.git",
+    "jp.keijiro.kino.post-processing.utilities": "https://github.com/keijiro/PostProcessingUtilities.git#upm",
     "jp.keijiro.klak.timeline.procedural-motion": "https://github.com/keijiro/ProceduralMotionTrack.git#upm",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.audio": "1.0.0",
@@ -32,6 +33,10 @@
     "jp.keijiro.ffmpeg-out": {
       "hash": "e16db01d0d2622a1379c80fad6eec59f7d3111c9",
       "revision": "HEAD"
+    },
+    "jp.keijiro.kino.post-processing.utilities": {
+      "hash": "5eb28156b11882dc761c93d2214d749bf38fae4f",
+      "revision": "upm"
     }
   }
 }
