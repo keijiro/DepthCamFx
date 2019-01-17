@@ -113,7 +113,7 @@ namespace Ditho
             Utility.Destroy(_material);
         }
 
-        void Update()
+        void LateUpdate()
         {
             LazyInitialize();
 
