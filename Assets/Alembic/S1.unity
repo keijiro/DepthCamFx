@@ -255,7 +255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617814877}
   m_LocalRotation: {x: 9.313226e-10, y: 4.656613e-10, z: 8.367351e-11, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.8}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1919055065}
@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644026681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: -0.15}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2126328870}
@@ -566,7 +566,7 @@ MonoBehaviour:
   sharedProfile: {fileID: 11400000, guid: 5d27ec275ab0de54faab9e48d196d5f7, type: 2}
   isGlobal: 1
   blendDistance: 0
-  weight: 0.15
+  weight: 0.3
   priority: 1
 --- !u!1 &900399589
 GameObject:
@@ -606,7 +606,7 @@ MonoBehaviour:
   _noiseAnimation: 1
   _renderMode: 0
   _lineColor: {r: 11.459208, g: 14.047949, b: 14.991155, a: 1}
-  _lineRepeat: 300
+  _lineRepeat: 250
   _sparkleColor: {r: 3177.8804, g: 553.1738, b: 0, a: 1}
   _sparkleDensity: 0.4
   _shader: {fileID: 4800000, guid: 6fe0e0a6ac2908141958edb55d4ba732, type: 3}
@@ -1150,14 +1150,14 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 114061707493694482, guid: b6e6b77f15e3c4443b1ee2873d2befd3, type: 2}
     value: {fileID: 679047814}
-  - key: {fileID: 114969294315953396, guid: b6e6b77f15e3c4443b1ee2873d2befd3, type: 2}
-    value: {fileID: 1378301856}
   - key: {fileID: 114330446827792892, guid: b6e6b77f15e3c4443b1ee2873d2befd3, type: 2}
     value: {fileID: 1157827529}
   - key: {fileID: 114943155913525272, guid: b6e6b77f15e3c4443b1ee2873d2befd3, type: 2}
     value: {fileID: 1657600004}
   - key: {fileID: 114177225155012330, guid: b6e6b77f15e3c4443b1ee2873d2befd3, type: 2}
     value: {fileID: 679047813}
+  - key: {fileID: 114672512853051208, guid: b6e6b77f15e3c4443b1ee2873d2befd3, type: 2}
+    value: {fileID: 644026683}
   m_ExposedReferences:
     m_References:
     - e6e2c49620cc6dc4599c9a0af3bd23cc: {fileID: 0}
@@ -1185,7 +1185,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126328869}
-  m_LocalRotation: {x: 0.10113577, y: 0.052642565, z: -0.005359072, w: 0.9934644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
