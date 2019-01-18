@@ -605,10 +605,10 @@ MonoBehaviour:
   _noiseAmplitude: 0
   _noiseAnimation: 1
   _renderMode: 0
-  _lineColor: {r: 11.459208, g: 14.047949, b: 14.991155, a: 1}
+  _lineColor: {r: 27.53272, g: 5.002013, b: 3.3154585, a: 1}
   _lineRepeat: 250
-  _sparkleColor: {r: 3177.8804, g: 553.1738, b: 0, a: 1}
-  _sparkleDensity: 0.4
+  _sparkleColor: {r: 3177.8804, g: 565.696, b: 0, a: 1}
+  _sparkleDensity: 0.38
   _shader: {fileID: 4800000, guid: 6fe0e0a6ac2908141958edb55d4ba732, type: 3}
 --- !u!4 &900399591
 Transform:
