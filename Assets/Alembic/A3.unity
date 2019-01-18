@@ -149,7 +149,7 @@ MonoBehaviour:
   _cutoff: 0.12
   _noiseAmplitude: 0.05
   _noiseAnimation: 1
-  _lineColor: {r: 55.06544, g: 8.315481, b: 2.8830066, a: 1}
+  _lineColor: {r: 27.53272, g: 1.7298044, b: 1.4415036, a: 1}
   _shader: {fileID: 4800000, guid: 7a858575495384006b2aee11f2498568, type: 3}
 --- !u!4 &95468490
 Transform:
@@ -968,10 +968,10 @@ MonoBehaviour:
   _noiseAmplitude: 0
   _noiseAnimation: 1
   _renderMode: 0
-  _lineColor: {r: 1.7568619, g: 7.5254974, b: 23.968628, a: 1}
+  _lineColor: {r: 11.459208, g: 14.047949, b: 14.991155, a: 1}
   _lineRepeat: 150
-  _sparkleColor: {r: 66.696365, g: 571.46423, b: 749.35333, a: 1}
-  _sparkleDensity: 0.398
+  _sparkleColor: {r: 2024.1144, g: 1314.0847, b: 201.3517, a: 1}
+  _sparkleDensity: 0.32
   _shader: {fileID: 4800000, guid: 6fe0e0a6ac2908141958edb55d4ba732, type: 3}
 --- !u!4 &900399591
 Transform:
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   _speedRandomness: 0.2
   _length: 0.04
   _lengthRandomness: 0.2
-  _lineColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+  _lineColor: {r: 0.47749817, g: 0.47749817, b: 0.47749817, a: 1}
   _sparkleColor: {r: 6.033978, g: 35.848927, b: 67.79352, a: 1}
   _sparkleDensity: 0.335
   _shader: {fileID: 4800000, guid: 7ebfcd9aea591ed4ab4f3dc8120ce567, type: 3}
@@ -1322,8 +1322,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378301855}
-  m_LocalRotation: {x: -0.0000000010641731, y: -5.3208654e-10, z: -9.5609416e-11,
-    w: 0.99999243}
+  m_LocalRotation: {x: -0.0000000010643993, y: -5.321997e-10, z: -9.562979e-11, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

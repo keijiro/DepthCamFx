@@ -605,7 +605,7 @@ MonoBehaviour:
   _noiseAmplitude: 0
   _noiseAnimation: 1
   _renderMode: 0
-  _lineColor: {r: 27.53272, g: 5.002013, b: 3.3154585, a: 1}
+  _lineColor: {r: 16.436897, g: 3.450198, b: 0.8528579, a: 1}
   _lineRepeat: 250
   _sparkleColor: {r: 3177.8804, g: 565.696, b: 0, a: 1}
   _sparkleDensity: 0.38
