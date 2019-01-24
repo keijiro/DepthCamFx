@@ -21,6 +21,7 @@ namespace Ditho
         [SerializeField] float _noiseAnimation = 1;
 
         [SerializeField, ColorUsage(false, true)] Color _lineColor = Color.white;
+        [SerializeField, Range(0, 1)] float _attenuation = 1;
 
         [SerializeField] Shader _shader = null;
 
@@ -132,6 +133,7 @@ namespace Ditho
             ));
 
             _material.SetColor("_LineColor", _lineColor);
+            _material.SetFloat("_Attenuation", _attenuation);
             _material.SetFloat("_LocalTime", LocalTime + 10);
 
             Graphics.DrawMesh(

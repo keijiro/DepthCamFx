@@ -18,6 +18,7 @@ namespace Ditho
         SerializedProperty _noiseAnimation;
 
         SerializedProperty _lineColor;
+        SerializedProperty _attenuation;
 
         void OnEnable()
         {
@@ -32,6 +33,7 @@ namespace Ditho
             _noiseAnimation = serializedObject.FindProperty("_noiseAnimation");
 
             _lineColor      = serializedObject.FindProperty("_lineColor");
+            _attenuation    = serializedObject.FindProperty("_attenuation");
         }
 
         public override void OnInspectorGUI()
@@ -56,6 +58,7 @@ namespace Ditho
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(_lineColor);
+            EditorGUILayout.PropertyField(_attenuation);
 
             serializedObject.ApplyModifiedProperties();
 

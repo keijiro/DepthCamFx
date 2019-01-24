@@ -14,6 +14,7 @@ Shader "Hidden/Ditho/Warp"
     float2 _NoiseParams; // amp, speed
 
     float3 _LineColor;
+    float _Attenuation;
 
     float _LocalTime;
 
@@ -45,9 +46,15 @@ Shader "Hidden/Ditho/Warp"
         // Additional noise
         os_pos.z *= 1 + snoise(float2(n3, n1 * -10)) * _NoiseParams.x;
 
+        // Attenuation noise
+        float atten = saturate(10 * (snoise(_LocalTime * 2) / 2 + snoise(_LocalTime)));
+        atten *= saturate(10 * snoise(os_pos.xy * 10 + _LocalTime * 10));
+        atten = lerp(0, atten, saturate(_Attenuation * 2));
+        atten = lerp(atten, 1, saturate(_Attenuation * 2 - 1));
+
         // Output
         cs_position = UnityObjectToClipPos(float4(os_pos, 1));
-        alpha = d;
+        alpha = d * atten;
     }
 
     float4 Fragment(
