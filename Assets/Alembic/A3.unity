@@ -150,6 +150,7 @@ MonoBehaviour:
   _noiseAmplitude: 0.05
   _noiseAnimation: 1
   _lineColor: {r: 27.53272, g: 1.7298044, b: 1.4415036, a: 1}
+  _attenuation: 0.5
   _shader: {fileID: 4800000, guid: 7a858575495384006b2aee11f2498568, type: 3}
 --- !u!4 &95468490
 Transform:
@@ -1322,7 +1323,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378301855}
-  m_LocalRotation: {x: -0.0000000010655044, y: -5.327522e-10, z: -9.572913e-11, w: 0.9999917}
+  m_LocalRotation: {x: -0.0000000010659712, y: -5.329856e-10, z: -9.5771086e-11, w: 0.99999404}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1877,7 +1878,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126328869}
-  m_LocalRotation: {x: -0.06251843, y: 0.58135796, z: 0.044871066, w: 0.8100006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
