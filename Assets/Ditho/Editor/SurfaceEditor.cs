@@ -18,6 +18,7 @@ namespace Ditho
 
         SerializedProperty _renderMode;
         SerializedProperty _lineColor;
+        SerializedProperty _lineWidth;
         SerializedProperty _lineRepeat;
         SerializedProperty _sparkleColor;
         SerializedProperty _sparkleDensity;
@@ -35,6 +36,7 @@ namespace Ditho
 
             _renderMode     = serializedObject.FindProperty("_renderMode");
             _lineColor      = serializedObject.FindProperty("_lineColor");
+            _lineWidth      = serializedObject.FindProperty("_lineWidth");
             _lineRepeat     = serializedObject.FindProperty("_lineRepeat");
             _sparkleColor   = serializedObject.FindProperty("_sparkleColor");
             _sparkleDensity = serializedObject.FindProperty("_sparkleDensity");
@@ -61,6 +63,7 @@ namespace Ditho
 
             EditorGUILayout.PropertyField(_renderMode);
             EditorGUILayout.PropertyField(_lineColor);
+            EditorGUILayout.PropertyField(_lineWidth);
             EditorGUILayout.PropertyField(_lineRepeat);
             EditorGUILayout.PropertyField(_sparkleColor);
             EditorGUILayout.PropertyField(_sparkleDensity);

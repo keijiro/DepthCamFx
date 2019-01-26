@@ -255,7 +255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617814877}
   m_LocalRotation: {x: 9.313226e-10, y: 4.656613e-10, z: 8.367351e-11, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.5}
+  m_LocalPosition: {x: 0, y: 0, z: -2.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1919055065}
@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644026681}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2126328870}
@@ -606,6 +606,7 @@ MonoBehaviour:
   _noiseAnimation: 1
   _renderMode: 0
   _lineColor: {r: 16.436897, g: 3.450198, b: 0.8528579, a: 1}
+  _lineWidth: 2
   _lineRepeat: 250
   _sparkleColor: {r: 3177.8804, g: 565.696, b: 0, a: 1}
   _sparkleDensity: 0.38
@@ -881,8 +882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66fbd5ffe9b9d64da304996f1919f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 1920
-  _height: 1080
+  _width: 4096
+  _height: 3072
   _preset: 6
   _frameRate: 24
 --- !u!20 &1657600001
@@ -1156,8 +1157,6 @@ PlayableDirector:
     value: {fileID: 1657600004}
   - key: {fileID: 114177225155012330, guid: b6e6b77f15e3c4443b1ee2873d2befd3, type: 2}
     value: {fileID: 679047813}
-  - key: {fileID: 114672512853051208, guid: b6e6b77f15e3c4443b1ee2873d2befd3, type: 2}
-    value: {fileID: 644026683}
   m_ExposedReferences:
     m_References:
     - e6e2c49620cc6dc4599c9a0af3bd23cc: {fileID: 0}

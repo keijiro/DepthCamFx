@@ -12,7 +12,7 @@ Shader "Hidden/Ditho/Surface"
     float2 _NoiseParams; // amp, anim
 
     float3 _LineColor;
-    float _LineRepeat;
+    float2 _LineParams; // repeat, width
 
     float3 _SparkleColor;
     float _SparkleDensity;
@@ -68,10 +68,10 @@ Shader "Hidden/Ditho/Surface"
         clip(color.z - (dither + 1) * _DepthParams.y / 2);
 
         // Potential
-        float pt = color.y * _LineRepeat;
+        float pt = color.y * _LineParams.x;
 
         // Line intensity
-        float li = saturate(1 - abs(0.5 - frac(pt)) / fwidth(pt));
+        float li = saturate(1 - abs(0.5 - frac(pt)) / (fwidth(pt) * _LineParams.y));
 
         // World space position based noise field
         float nf = snoise(ws_position * 500);

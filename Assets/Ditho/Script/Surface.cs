@@ -24,6 +24,7 @@ namespace Ditho
         [SerializeField] RenderMode _renderMode = RenderMode.Opaque;
 
         [SerializeField, ColorUsage(false, true)] Color _lineColor = Color.white;
+        [SerializeField] float _lineWidth = 1;
         [SerializeField] float _lineRepeat = 200;
 
         [SerializeField, ColorUsage(false, true)] Color _sparkleColor = Color.white;
@@ -176,7 +177,9 @@ namespace Ditho
             }
 
             _material.SetColor("_LineColor", _lineColor);
-            _material.SetFloat("_LineRepeat", _lineRepeat);
+            _material.SetVector("_LineParams", new Vector2(
+                _lineRepeat, _lineWidth
+            ));
 
             _material.SetColor("_SparkleColor", _sparkleColor);
             _material.SetFloat("_SparkleDensity", _sparkleDensity);
