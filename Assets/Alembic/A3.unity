@@ -149,7 +149,7 @@ MonoBehaviour:
   _cutoff: 0.12
   _noiseAmplitude: 0.05
   _noiseAnimation: 1
-  _lineColor: {r: 27.53272, g: 1.7298044, b: 1.4415036, a: 1}
+  _lineColor: {r: 155.74858, g: 9.785252, b: 8.154376, a: 1}
   _attenuation: 0.5
   _shader: {fileID: 4800000, guid: 7a858575495384006b2aee11f2498568, type: 3}
 --- !u!4 &95468490
@@ -269,7 +269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &203753801
 Transform:
   m_ObjectHideFlags: 0
@@ -881,7 +881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &808048606
 Transform:
   m_ObjectHideFlags: 0
@@ -970,6 +970,7 @@ MonoBehaviour:
   _noiseAnimation: 1
   _renderMode: 0
   _lineColor: {r: 11.459208, g: 14.047949, b: 14.991155, a: 1}
+  _lineWidth: 1
   _lineRepeat: 150
   _sparkleColor: {r: 2024.1144, g: 1314.0847, b: 201.3517, a: 1}
   _sparkleDensity: 0.32
@@ -1017,7 +1018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50539bb676b16ee4a9b34291877f7fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lineCount: 2000
+  _lineCount: 3000
   _depth: 14
   _cutoff: 0.1
   _extent: {x: 4, y: 4, z: 1}
@@ -1025,7 +1026,7 @@ MonoBehaviour:
   _speedRandomness: 0.2
   _length: 0.04
   _lengthRandomness: 0.2
-  _lineColor: {r: 0.47749817, g: 0.47749817, b: 0.47749817, a: 1}
+  _lineColor: {r: 2.9960785, g: 2.8862746, b: 2.3686275, a: 1}
   _sparkleColor: {r: 6.033978, g: 35.848927, b: 67.79352, a: 1}
   _sparkleDensity: 0.335
   _shader: {fileID: 4800000, guid: 7ebfcd9aea591ed4ab4f3dc8120ce567, type: 3}
@@ -1323,7 +1324,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378301855}
-  m_LocalRotation: {x: -0.0000000010659712, y: -5.329856e-10, z: -9.5771086e-11, w: 0.99999404}
+  m_LocalRotation: {x: -0.000000001067416, y: -5.33708e-10, z: -9.5900836e-11, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1546,7 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55bddfe16e69224c8c4b4eb165695d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameRate: 24
+  _frameRate: 60
   _offlineMode: 1
 --- !u!114 &1657600000
 MonoBehaviour:
@@ -1560,10 +1561,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66fbd5ffe9b9d64da304996f1919f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 1920
-  _height: 1080
-  _preset: 6
-  _frameRate: 24
+  _width: 1024
+  _height: 1024
+  _preset: 2
+  _frameRate: 60
 --- !u!20 &1657600001
 Camera:
   m_ObjectHideFlags: 0
@@ -1588,7 +1589,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 5
-  field of view: 13
+  field of view: 15
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1878,7 +1879,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126328869}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.06251843, y: 0.58135796, z: 0.044871066, w: 0.8100006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

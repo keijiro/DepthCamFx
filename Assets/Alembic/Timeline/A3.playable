@@ -7130,8 +7130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template:
     positionAmount: {x: 0, y: 0, z: 0}
-    rotationAmount: {x: 40, y: 30, z: 30}
-    frequency: 0.04
+    rotationAmount: {x: 45, y: 90, z: 45}
+    frequency: 0.15
     octaves: 3
     randomSeed: 42254
 --- !u!114 &114201569801407532
@@ -7399,7 +7399,7 @@ MonoBehaviour:
   m_Name: Procedural Motion Track (1)
   m_EditorClassIdentifier: 
   m_Locked: 0
-  m_Muted: 1
+  m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 114798261611742988}
@@ -8196,7 +8196,7 @@ MonoBehaviour:
   m_Name: Rotation
   m_EditorClassIdentifier: 
   m_Locked: 0
-  m_Muted: 1
+  m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 74948229873478820}
   m_Parent: {fileID: 114201569801407532}
@@ -8231,7 +8231,7 @@ MonoBehaviour:
   m_Name: Rotation 2
   m_EditorClassIdentifier: 
   m_Locked: 0
-  m_Muted: 0
+  m_Muted: 1
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 74710696362900528}
   m_Parent: {fileID: 114201569801407532}

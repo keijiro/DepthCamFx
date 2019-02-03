@@ -6049,7 +6049,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 7
+        value: 16
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -6105,7 +6105,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 7
+        value: 16
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -6666,7 +6666,7 @@ MonoBehaviour:
   m_Name: Procedural Motion Track (1)
   m_EditorClassIdentifier: 
   m_Locked: 0
-  m_Muted: 0
+  m_Muted: 1
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 0}
   m_Parent: {fileID: 114164362911136532}
@@ -6755,7 +6755,7 @@ MonoBehaviour:
   m_Name: Zoom
   m_EditorClassIdentifier: 
   m_Locked: 0
-  m_Muted: 1
+  m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_AnimClip: {fileID: 74536564611829700}
   m_Parent: {fileID: 114263019409232564}
